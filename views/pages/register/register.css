@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Paleta de colores */
+:root{
+    --primary-color: #1A3263;
+    --secondary-color: #F5564E;
+    --tertiary-color: #FAB95B;
+    --fourthly-color: #E8E2DB;
+    --fifthly-color: #FFFFFF;
+}
+
+html, body{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.register{
+    max-width: 600px;
+    height: 60vh;
+}
+
+.register .register__title{
+    font-size: 40pt;
+    text-decoration: underline;
+    text-decoration-color: var(--secondary-color);
+    text-align: center;
+}
+
+.register .register__text{
+    font-size: 18pt;
+    text-align: center;
+}
+
+.register .register__text a{
+    font-weight: 600;
+    color: var(--tertiary-color);
+}
+
+.register .register__text a:hover{
+    color: var(--secondary-color);
+}
+
+.up{
+    margin-bottom: 5px;
+}
+
+.down{
+    margin-top: 0px;
+}
+
+form{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+}
+
+.form__input{
+    width: 65%;
+    box-sizing: border-box;
+    font-size: 15pt;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: .5px solid gray;
+    margin-bottom: 25px;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form__button{
+    width: 45%;
+    height: 40px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    color: var(--fifthly-color);
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.form__button:hover{
+    background-color: var(--tertiary-color);
+}
+
+@media (max-width: 1367px){
+    .register{
+        height: unset;
+    }
+}
