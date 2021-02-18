@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./user-home.css" />
+		<title>Home</title>
+	</head>
+	<body>
+		<section class="home">
+			<nav class="home__header">
+				<h1 class="home__header--title">Open</h1>
+				<button class="home__header--button">Create ticket</button>
+				<div class="home__header--searchbar">
+					<input type="text" placeholder="Search" />
+				</div>
+				<a class="home__header--user" onclick="dropdownMenu()">
+					<img
+						src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+						alt="user image"
+					/>
+					<ul class="home__header--dropdown">
+						<li><a href="#">Log out</a></li>
+					</ul>
+				</a>
+			</nav>
+			<section class="home__open-tickets"></section>
+			<nav class="home__header-closed-tickets">
+				<h1 class="home__header-closed-tickets--title">Closed</h1>
+			</nav>
+			<section class="home__closed-tickets"></section>
+		</section>
+		<script src="./../../../controller/pages/user-home.js"></script>
+	</body>
+</html>
