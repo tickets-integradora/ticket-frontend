@@ -1,4 +1,5 @@
 @import "./../../../main.css";
+@import "./../../css/components/header.css";
 
 body{
     display: grid;
@@ -8,132 +9,15 @@ body{
 }
 
 .home{
-    height: 100vh;
+    height: 94vh;
     padding: 25px 60px;
 }
 
-.home__header{
-    /* border: 1px solid red; */
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 40px;
-    grid-template-rows: 60px;
-}
-
-.home__header--title{
-    font-size: 18pt;
-    text-decoration: underline;
-    text-decoration-color: var(--tertiary-color);
-    margin: auto 0;
-}
-
-.home__header--button{
-    height: 30px;
-    width: 30%;
-    font-weight: 500;
-    place-self: center;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 20px;
-    color: var(--fifthly-color);
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    font-size: 9pt;
-    outline: none;
-    cursor: pointer;
-}
-
-.home__header--button:hover{
-    background-color: var(--secondary-color);
-}
-
-.home__header--searchbar{
-    /* border: 1px solid red; */
-    height: 30px;
-    width: 50%;
-    place-self: flex-end;
-    align-self: center;
-}
-
-.home__header--searchbar input{
-    font-size: 16px;
-    line-height: 1.5;
-    border: none;
-    background: #FFFFFF;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><path fill='%23838D99' d='M13.22 14.63a8 8 0 1 1 1.41-1.41l4.29 4.29a1 1 0 1 1-1.41 1.41l-4.29-4.29zm-.66-2.07a6 6 0 1 0-8.49-8.49 6 6 0 0 0 8.49 8.49z'></path></svg>");
-    background-repeat: no-repeat;
-    background-position: 8px 7px;
-    background-size: 16px 16px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.08);
-    border-radius: 20px;
-    width: 200px;
-    padding: 3px 5px 3px 30px;
-}
-
-.home__header--searchbar input::placeholder{
-    color: #838D99;
-}
-
-.home__header--searchbar input:focus{
-    outline: none;
-    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.16);
-}
-
-.home__header--user{
-    border-radius: 50%;
-    display: grid;
-    place-self: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-}
-
-.home__header--user img{
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.home__header--dropdown{
-    display: none;
-    background-color: var(--fifthly-color);
-    position: absolute;
-    top: 75px;
-    right: 30px;
-    width: 50px;
-    margin: auto;
-    padding: 15px 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.16);
-}
-
-.home__header--dropdown li{
-    width: 85px;
-    padding-left: 0px;
-    margin-left: -18px;
-    text-align: center;
-    list-style: none;
-}
-
-.home__header--dropdown li a{
-    text-decoration: none;
-    font-size: 10pt;
+.home__tickets{
     width: 100%;
-}
-
-.home__header--dropdown li a:hover{
-    color: var(--secondary-color);  
-    font-weight: 500;
-}
-
-.menu-active{
-    display: block;
-}
-
-.home__open-tickets{
-    width: 100%;
-    height:600px;
+    height:85vh;
     background-color: var(--fifthly-color);
+    border-radius: 10px;
 }
 
 .home__header-closed-tickets--title{
@@ -141,4 +25,23 @@ body{
     text-decoration: underline;
     text-decoration-color: var(--secondary-color);
     margin: auto 0;
+}
+
+.tickets__tab{
+    display: none;
+    padding: 5px 10px;
+    clear: left;
+}
+
+.tickets__tab .tickets__tab--ticket{
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid var(--primary-color);
+    height: 30px;
+    margin: 5px 0 5px 0;
+    text-decoration: none;
+}
+
+.tickets__tab .tickets__tab--ticket:hover{
+    border-bottom: 1px solid var(--acceptance-color);
 }
