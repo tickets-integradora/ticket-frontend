@@ -1,0 +1,47 @@
+@import "./../../../main.css";
+@import "./../../css/components/header.css";
+
+body{
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 50px 1fr 50px 1fr;
+    background: var(--background-color);
+}
+
+.home{
+    height: 94vh;
+    padding: 25px 60px;
+}
+
+.home__tickets{
+    width: 100%;
+    height:85vh;
+    background-color: var(--fifthly-color);
+    border-radius: 10px;
+}
+
+.home__header-closed-tickets--title{
+    font-size: 18pt;
+    text-decoration: underline;
+    text-decoration-color: var(--secondary-color);
+    margin: auto 0;
+}
+
+.tickets__tab{
+    display: none;
+    padding: 5px 10px;
+    clear: left;
+}
+
+.tickets__tab .tickets__tab--ticket{
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid var(--primary-color);
+    height: 30px;
+    margin: 5px 0 5px 0;
+    text-decoration: none;
+}
+
+.tickets__tab .tickets__tab--ticket:hover{
+    border-bottom: 1px solid var(--acceptance-color);
+}
