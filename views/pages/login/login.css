@@ -1,4 +1,4 @@
-/* Paleta de colores */
+/* Paleta de colores
 :root{
     --primary-color: #1A3263;
     --secondary-color: #F5564E;
@@ -100,4 +100,4 @@ input[type="submit"]:active{
     form{
         width: 95%;
     }
-}
+} */

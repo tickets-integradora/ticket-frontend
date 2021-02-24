@@ -43,5 +43,5 @@ body{
 }
 
 .tickets__tab .tickets__tab--ticket:hover{
-    border-bottom: 1px solid var(--acceptance-color);
+    border-bottom: 1.5px solid var(--primary-color);
 }

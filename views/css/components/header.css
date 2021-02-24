@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 40px;
     grid-template-rows: 60px;
+    position: relative;
 }
 
 .home__header--tabs{
@@ -27,12 +28,24 @@
     text-decoration-color: var(--acceptance-color);
 }
 
+.open:hover{
+    color: var(--acceptance-color);
+}
+
 .in_progress{
     text-decoration-color: var(--tertiary-color);
 }
 
+.in_progress:hover{
+    color: var(--tertiary-color);
+}
+
 .closed{
     text-decoration-color: var(--secondary-color);
+}
+
+.closed:hover{
+    color: var(--secondary-color);
 }
 .active-tab--in_progress{
     text-decoration: underline;
@@ -62,7 +75,7 @@
 }
 
 .home__header--searchbar{
-    /* border: 1px solid red; */
+    margin-right: 25px;
     height: 30px;
     width: 50%;
     place-self: flex-end;
@@ -113,8 +126,8 @@
     display: none;
     background-color: var(--fifthly-color);
     position: absolute;
-    top: 75px;
-    right: 30px;
+    top: 50px;
+    right: -22px;
     width: 50px;
     margin: auto;
     padding: 15px 20px;
