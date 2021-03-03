@@ -1,0 +1,11 @@
+{
+  "numero_ticket" : "1",
+  "fecha_creacion": "2021-02-04T18:48:46.250Z",
+  "fecha_vencimiento": "2021-03-04T18:48:46.250Z",
+  "gravedad": "alta",
+  "descripcion": "Falta limpiar sala 10",
+  "departamento": "limpieza",
+  "empleado_responsable": "Josefa Jimenez",
+  "reportador": "Francisco Moreno",
+  "status": "open"
+}
