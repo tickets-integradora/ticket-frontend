@@ -1,4 +1,4 @@
-const API = 'https://rickandmortyapi.com/api/character/';
+const API = './../../../model/tickets.json';
 
 const getData = async (id) => {
 	const apiURL = id ? `${API}${id}` : API;

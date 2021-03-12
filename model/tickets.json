@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "numero_ticket" : "1",
+      "fecha_creacion": "2021-02-04T18:48:46.250Z",
+      "fecha_vencimiento": "2021-03-04T18:48:46.250Z",
+      "gravedad": "alta",
+      "descripcion": "Falta limpiar sala 10",
+      "departamento": "limpieza",
+      "empleado_responsable": "Francisco Moreno",
+      "reportador": "Jorge Jimenez",
+      "status": "open",
+      "imagen_empleado_responsable" : "https://picsum.photos/200",
+      "imagen_reportador": "https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "numero_ticket" : "2",
+      "fecha_creacion": "2021-02-04T18:48:46.250Z",
+      "fecha_vencimiento": "2021-03-04T18:48:46.250Z",
+      "gravedad": "mediana",
+      "descripcion": "Falta limpiar sala 10",
+      "departamento": "soporte",
+      "empleado_responsable": "Francisco Moreno",
+      "reportador": "Josefa Jimenez",
+      "status": "open",
+      "imagen_empleado_responsable": "https://picsum.photos/200",
+      "imagen_reportador": "https://picsum.photos/200"
+    },
+    {
+      "numero_ticket" : "3",
+      "fecha_creacion": "2021-02-04T18:48:46.250Z",
+      "fecha_vencimiento": "2021-07-05T18:48:46.250Z",
+      "gravedad": "baja",
+      "descripcion": "Falta limpiar sala 87",
+      "departamento": "limpieza",
+      "empleado_responsable": "Francisco Moreno",
+      "reportador": "Alicia Gonzalez",
+      "status": "open",
+      "imagen_empleado_responsable": "https://picsum.photos/200",
+      "imagen_reportador": "https://picsum.photos/200"
+    },
+    {
+      "numero_ticket" : "4",
+      "fecha_creacion": "2021-02-04T18:48:46.250Z",
+      "fecha_vencimiento": "2021-05-06T18:48:46.250Z",
+      "gravedad": "alta",
+      "descripcion": "Falta limpiar sala 87",
+      "departamento": "limpieza",
+      "empleado_responsable": "Francisco Moreno",
+      "reportador": "Alicia Gonzalez",
+      "status": "closed",
+      "imagen_empleado_responsable": "https://picsum.photos/200",
+      "imagen_reportador": "https://picsum.photos/200"
+    },
+    {
+      "numero_ticket" : "5",
+      "fecha_creacion": "2021-02-04T18:48:46.250Z",
+      "fecha_vencimiento": "2021-06-04T18:48:46.250Z",
+      "gravedad": "mediana",
+      "descripcion": "Falta limpiar sala 87",
+      "departamento": "limpieza",
+      "empleado_responsable": "Francisco Moreno",
+      "reportador": "Alicia Gonzalez",
+      "status": "in progress",
+      "imagen_empleado_responsable": "https://picsum.photos/200",
+      "imagen_reportador": "https://picsum.photos/200"
+    }
+  ]
+}

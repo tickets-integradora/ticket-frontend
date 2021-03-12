@@ -103,3 +103,75 @@ body{
     border-radius: 50%;
     object-fit: cover;
 }
+
+.green {
+    background-color: var(--acceptance-color);
+}
+
+.red {
+    background-color: var(--secondary-color);
+}
+
+.yellow {
+    background-color: var(--tertiary-color);
+}
+
+.home__ticketMenu {
+    background-color: var(--fifthly-color);
+    width: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.home__ticketMenu--container {
+    padding: 20px;
+}
+
+.container__title {
+    font-weight: 600;
+}
+
+.container__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.container__grid h1 {
+    font-weight: 600;
+}
+
+.container__grid #priority {
+    grid-row: 1 / span 1;
+}
+
+.container__grid #status {
+    grid-row: 2 / span 1;
+}
+
+.container__grid #department {
+    grid-row: 3 / span 1;
+}
+
+.container__grid #priorityChip {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 1;
+}
+
+.container__grid #statusChip {
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 1;
+}
+
+.container__grid #departmentChip {
+    grid-row: 3 / span 1;
+    grid-column: 2 / span 1;
+}

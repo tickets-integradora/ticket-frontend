@@ -5,7 +5,8 @@
   "gravedad": "alta",
   "descripcion": "Falta limpiar sala 10",
   "departamento": "limpieza",
-  "empleado_responsable": "Josefa Jimenez",
-  "reportador": "Francisco Moreno",
-  "status": "open"
-}
+  "empleado_responsable": "Francisco Moreno",
+  "reportador": "Jorge Jimenez",
+  "status": "open",
+  "imagen" : "https://picsum.photos/200"
+},

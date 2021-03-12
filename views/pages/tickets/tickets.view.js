@@ -1,9 +1,25 @@
 import getStyles from '../../../controller/utils/getStyles.js';
+import getData from '../../../controller/utils/getData.js';
+import getDate from '../../../controller/utils/getDate.js';
+import getPriorityColor from '../../../controller/utils/getPriorityColor.js';
 
-const Tickets = () => {
+const Tickets = async () => {
+	const tickets = await getData();
+	window.tickets = tickets;
+	const openTickets = tickets.results.filter((ticket) => {
+		return ticket.status === 'open';
+	});
+	const closedTickets = tickets.results.filter((ticket) => {
+		return ticket.status === 'closed';
+	});
+	const inProgressTickets = tickets.results.filter((ticket) => {
+		return ticket.status === 'in progress';
+	});
 	getStyles('tickets');
 	const view = `
     <section class="home">
+			<div class="home__ticketMenu">
+			</div>
 			<nav class="home__header">
 				<div class="home__header--tabs">
 					<button class="tabs__button active-tab open" onclick="openTab(event, 'open')">Open</button>
@@ -35,47 +51,71 @@ const Tickets = () => {
 				</div>
 				<div class="home__tickets--content">
 				<div id="open" class="tickets__tab" style="display: block">
-					<a class="tickets__tab--ticket" href="#">
-						<div class="chip priority">high</div>
-						<div class="ticket__text">Falta limpiar la sala...</div>
-						<div class="chip department">Limpieza</div>
-						<img class="user"
-						src="https://picsum.photos/200"
-						alt="user image"
-						>
-						<img class="user"
-						src="https://picsum.photos/200"
-						alt="user image"
-						>
-						<div class="ticket__text">21 de marzo 2021</div>
-					</a>
-					<a class="tickets__tab--ticket" href="#">
-						<div class="chip priority">high</div>
-						<div class="ticket__text">Falta limpiar la sala...</div>
-						<div class="chip department">Limpieza</div>
-						<img class="user"
-						src="https://picsum.photos/200"
-						alt="user image"
-						>
-						<img class="user"
-						src="https://picsum.photos/200"
-						alt="user image"
-						>
-						<div class="ticket__text">21 de marzo 2021</div>
-					</a>
+				${openTickets
+					.map((ticket) => {
+						let ticketTemplate = `
+							<a class="tickets__tab--ticket" onclick="getTicket(tickets, ${ticket.numero_ticket})">
+								<div class="chip priority ${getPriorityColor(ticket.gravedad)}">${ticket.gravedad}</div>
+								<div class="ticket__text">${ticket.descripcion}</div>
+								<div class="chip department">${ticket.departamento}</div>
+								<img class="user"
+								src="${ticket.imagen_empleado_responsable}"
+								alt="imagen de ${ticket.empleado_responsable}"
+								>
+								<img class="user"
+								src="${ticket.imagen_reportador}"
+								alt="imagen de ${ticket.reportador}"
+								>
+								<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>
+							</a>
+						`;
+						return ticketTemplate;
+					})
+					.join('')}
 				</div>
 				<div id="in_progress" class="tickets__tab" style="display: none">
-					<a class="tickets__tab--ticket" href="#">Ticket in progress</a>
-					<a class="tickets__tab--ticket" href="#">Ticket in progress</a>
-					<a class="tickets__tab--ticket" href="#">Ticket in progress</a>
-					<a class="tickets__tab--ticket" href="#">Ticket in progress</a>
-					<a class="tickets__tab--ticket" href="#">Ticket in progress</a>
-					<a class="tickets__tab--ticket" href="#">Ticket in progress</a>
+				${inProgressTickets
+					.map(
+						(ticket) => `
+					<a class="tickets__tab--ticket"  onclick="getTicket(tickets, ${ticket.numero_ticket})">
+						<div class="chip priority ${getPriorityColor(ticket.gravedad)}">${ticket.gravedad}</div>
+						<div class="ticket__text">${ticket.descripcion}</div>
+						<div class="chip department">${ticket.departamento}</div>
+						<img class="user"
+						src="${ticket.imagen_empleado_responsable}"
+						alt="imagen de ${ticket.empleado_responsable}"
+						>
+						<img class="user"
+						src="${ticket.imagen_reportador}"
+						alt="imagen de ${ticket.reportador}"
+						>
+						<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>
+					</a>
+				`
+					)
+					.join('')}
 				</div>
 				<div id="closed" class="tickets__tab" style="display: none">
-					<a class="tickets__tab--ticket" href="#">Ticket closed</a>
-					<a class="tickets__tab--ticket" href="#">Ticket closed</a>
-					<a class="tickets__tab--ticket" href="#">Ticket closed</a>
+				${closedTickets
+					.map(
+						(ticket) => `
+					<a class="tickets__tab--ticket"  onclick="getTicket(tickets, ${ticket.numero_ticket})">
+						<div class="chip priority ${getPriorityColor(ticket.gravedad)} ">${ticket.gravedad}</div>
+						<div class="ticket__text">${ticket.descripcion}</div>
+						<div class="chip department">${ticket.departamento}</div>
+						<img class="user"
+						src="${ticket.imagen_empleado_responsable}"
+						alt="imagen de ${ticket.empleado_responsable}"
+						>
+						<img class="user"
+						src="${ticket.imagen_reportador}"
+						alt="imagen de ${ticket.reportador}"
+						>
+						<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>
+					</a>
+				`
+					)
+					.join('')}
 				</div></div>
 			</section>
 		</section>
