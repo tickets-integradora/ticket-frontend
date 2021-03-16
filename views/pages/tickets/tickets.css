@@ -263,3 +263,30 @@ body{
     grid-row: 2 / span 1;
     grid-column: 1 / span 1;
 }
+
+.container__buttons {
+    position: absolute;
+    bottom: 30px;
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete {
+    border: none;
+    background-color: var(--secondary-color);
+    width: 87px;
+    height: 20px;
+    cursor: pointer;
+    outline: none;
+
+}
+
+.edit {
+    border: none;
+    background-color: var(--gray-color);
+    width: 87px;
+    height: 20px;
+    cursor: pointer;
+    outline: none;
+}

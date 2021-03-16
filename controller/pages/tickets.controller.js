@@ -74,6 +74,10 @@ const fillTicket = (ticket) => {
 			<h2>Descripción</h2>
 			<div>${ticket.descripcion}</div>
 		</div>
+		<div class="container__buttons">
+			<button onclick="deleteTicket()" class="chip delete">Delete</button>
+			<button onclick="editTicket(${ticket})" class="chip edit">edit</button>
+		</div>
 	</div>
 	`;
 	sideTicket.innerHTML = ticketTemplate;
@@ -105,3 +109,61 @@ const getPriorityColor = (priority) => {
 };
 
 const getDate = (value) => new Date(value).toUTCString().split(' ').splice(0, 4).join(' ');
+
+const deleteTicket = () => {
+	console.log('delete');
+};
+
+const editTicket = (ticket) => {
+	console.log(ticket);
+	const sideTicket = document.querySelector('.home__ticketMenu');
+	let ticketTemplate = `
+	<div class="home__ticketMenu--container">
+		<h1 class="container__title">Ticket Edit #${ticket.numero_ticket}</h1>
+		<a class="close-button" onclick="closeTicket()"><span class="material-icons">close</span></a>
+		<div class="container__grid">
+			<h1 id="priority">Prioridad</h1>
+			<h1 id="status">Estado</h1>
+			<h1 id="department">Departamento</h1>
+			<div id="priorityChip" class="chip priority ${getPriorityColor(ticket.gravedad)}">${ticket.gravedad}</div>
+			<div id="statusChip" class="chip priority  ${getPriorityColor(ticket.status)}"">${ticket.status}</div>
+			<div id="departmentChip" class="chip department">${ticket.departamento}</div>
+		</div>
+		<hr>
+		<div class="container__dates">
+			<div>Fecha de creación</div>
+			<div class="ticket-date">${getDate(ticket.fecha_creacion)}</div>
+			<div>Fecha de vencimiento</div>
+			<div class="ticket-date">${getDate(ticket.fecha_vencimiento)}</div>
+		</div>
+		<hr>
+		<div class="container__users">
+			<div class="responsible-text">Responsable</div>
+			<div class="responsible">
+				<img class="user"
+					src="${ticket.imagen_empleado_responsable}"
+					alt="imagen de ${ticket.empleado_responsable}"
+				>
+				<span>${ticket.empleado_responsable}</span>
+			</div>
+			<div class="reporter-text">Autor</div>
+			<div class="reporter">
+				<img class="user"
+					src="${ticket.imagen_reportador}"
+					alt="imagen de ${ticket.reportador}"
+				>
+				<span>${ticket.reportador}</span>
+			</div>
+		</div>
+		<div class="container__description">
+			<h2>Descripción</h2>
+			<div>${ticket.descripcion}</div>
+		</div>
+		<div class="container__buttons">
+			<button onclick="deleteTicket()" class="chip delete">Delete</button>
+			<button onclick="editTicket()" class="chip edit">edit</button>
+		</div>
+	</div>
+	`;
+	sideTicket.innerHTML = ticketTemplate;
+};
