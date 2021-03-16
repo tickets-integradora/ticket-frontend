@@ -7,28 +7,28 @@ const Tickets = async () => {
 	const tickets = await getData();
 	window.tickets = tickets;
 	const openTickets = tickets.results.filter((ticket) => {
-		return ticket.status === 'open';
+		return ticket.status === 'abierto';
 	});
 	const closedTickets = tickets.results.filter((ticket) => {
-		return ticket.status === 'closed';
+		return ticket.status === 'cerrado';
 	});
 	const inProgressTickets = tickets.results.filter((ticket) => {
-		return ticket.status === 'in progress';
+		return ticket.status === 'en progreso';
 	});
 	getStyles('tickets');
 	const view = `
     <section class="home">
-			<div class="home__ticketMenu">
+			<div class="home__ticketMenu animate__animated animate__fadeInLeft">
 			</div>
 			<nav class="home__header">
 				<div class="home__header--tabs">
-					<button class="tabs__button active-tab open" onclick="openTab(event, 'open')">Open</button>
-					<button class="tabs__button in_progress" onclick="openTab(event, 'in_progress')">In progress</button>
-					<button class="tabs__button closed" onclick="openTab(event, 'closed')">Closed</button>
+					<button class="tabs__button active-tab open" onclick="openTab(event, 'open')">Abiertos</button>
+					<button class="tabs__button in_progress" onclick="openTab(event, 'in_progress')">En progreso</button>
+					<button class="tabs__button closed" onclick="openTab(event, 'closed')">Cerrados</button>
 				</div>
-				<button class="home__header--button">Create ticket</button>
+				<button class="home__header--button">Crear ticket</button>
 				<div class="home__header--searchbar">
-					<input type="text" placeholder="Search" />
+					<input type="text" placeholder="Buscar" />
 				</div>
 				<a class="home__header--user" onclick="dropdownMenu()">
 					<img
@@ -36,7 +36,7 @@ const Tickets = async () => {
 						alt="user image"
 					>
 					<ul class="home__header--dropdown">
-						<li><a href="#/login">Log out</a></li>
+						<li><a href="#/login">Cerrar sesión</a></li>
 					</ul>
 				</a>
 			</nav>
@@ -58,14 +58,20 @@ const Tickets = async () => {
 								<div class="chip priority ${getPriorityColor(ticket.gravedad)}">${ticket.gravedad}</div>
 								<div class="ticket__text">${ticket.descripcion}</div>
 								<div class="chip department">${ticket.departamento}</div>
-								<img class="user"
-								src="${ticket.imagen_empleado_responsable}"
-								alt="imagen de ${ticket.empleado_responsable}"
-								>
-								<img class="user"
-								src="${ticket.imagen_reportador}"
-								alt="imagen de ${ticket.reportador}"
-								>
+								<div class="responsible">
+									<img class="user"
+										src="${ticket.imagen_empleado_responsable}"
+										alt="imagen de ${ticket.empleado_responsable}"
+									>
+									<span>${ticket.empleado_responsable}</span>
+								</div>
+								<div class="reporter">
+									<img class="user"
+										src="${ticket.imagen_reportador}"
+										alt="imagen de ${ticket.reportador}"
+									>
+									<span>${ticket.reportador}</span>
+								</div>
 								<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>
 							</a>
 						`;
@@ -81,14 +87,20 @@ const Tickets = async () => {
 						<div class="chip priority ${getPriorityColor(ticket.gravedad)}">${ticket.gravedad}</div>
 						<div class="ticket__text">${ticket.descripcion}</div>
 						<div class="chip department">${ticket.departamento}</div>
-						<img class="user"
-						src="${ticket.imagen_empleado_responsable}"
-						alt="imagen de ${ticket.empleado_responsable}"
-						>
-						<img class="user"
-						src="${ticket.imagen_reportador}"
-						alt="imagen de ${ticket.reportador}"
-						>
+						<div class="responsible">
+							<img class="user"
+								src="${ticket.imagen_empleado_responsable}"
+								alt="imagen de ${ticket.empleado_responsable}"
+							>
+							<span>${ticket.empleado_responsable}</span>
+						</div>
+						<div class="reporter">
+							<img class="user"
+								src="${ticket.imagen_reportador}"
+								alt="imagen de ${ticket.reportador}"
+							>
+							<span>${ticket.reportador}</span>
+						</div>
 						<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>
 					</a>
 				`
@@ -103,14 +115,20 @@ const Tickets = async () => {
 						<div class="chip priority ${getPriorityColor(ticket.gravedad)} ">${ticket.gravedad}</div>
 						<div class="ticket__text">${ticket.descripcion}</div>
 						<div class="chip department">${ticket.departamento}</div>
-						<img class="user"
-						src="${ticket.imagen_empleado_responsable}"
-						alt="imagen de ${ticket.empleado_responsable}"
-						>
-						<img class="user"
-						src="${ticket.imagen_reportador}"
-						alt="imagen de ${ticket.reportador}"
-						>
+						<div class="responsible">
+							<img class="user"
+								src="${ticket.imagen_empleado_responsable}"
+								alt="imagen de ${ticket.empleado_responsable}"
+							>
+							<span>${ticket.empleado_responsable}</span>
+						</div>
+						<div class="reporter">
+							<img class="user"
+								src="${ticket.imagen_reportador}"
+								alt="imagen de ${ticket.reportador}"
+							>
+							<span>${ticket.reportador}</span>
+						</div>
 						<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>
 					</a>
 				`

@@ -9,7 +9,7 @@
       "departamento": "limpieza",
       "empleado_responsable": "Francisco Moreno",
       "reportador": "Jorge Jimenez",
-      "status": "open",
+      "status": "abierto",
       "imagen_empleado_responsable" : "https://picsum.photos/200",
       "imagen_reportador": "https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
     },
@@ -22,7 +22,7 @@
       "departamento": "soporte",
       "empleado_responsable": "Francisco Moreno",
       "reportador": "Josefa Jimenez",
-      "status": "open",
+      "status": "abierto",
       "imagen_empleado_responsable": "https://picsum.photos/200",
       "imagen_reportador": "https://picsum.photos/200"
     },
@@ -35,7 +35,7 @@
       "departamento": "limpieza",
       "empleado_responsable": "Francisco Moreno",
       "reportador": "Alicia Gonzalez",
-      "status": "open",
+      "status": "abierto",
       "imagen_empleado_responsable": "https://picsum.photos/200",
       "imagen_reportador": "https://picsum.photos/200"
     },
@@ -48,7 +48,7 @@
       "departamento": "limpieza",
       "empleado_responsable": "Francisco Moreno",
       "reportador": "Alicia Gonzalez",
-      "status": "closed",
+      "status": "cerrado",
       "imagen_empleado_responsable": "https://picsum.photos/200",
       "imagen_reportador": "https://picsum.photos/200"
     },
@@ -61,7 +61,7 @@
       "departamento": "limpieza",
       "empleado_responsable": "Francisco Moreno",
       "reportador": "Alicia Gonzalez",
-      "status": "in progress",
+      "status": "en progreso",
       "imagen_empleado_responsable": "https://picsum.photos/200",
       "imagen_reportador": "https://picsum.photos/200"
     }

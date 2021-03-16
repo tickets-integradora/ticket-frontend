@@ -21,8 +21,8 @@ const showPassword = () => {
 	const password = document.getElementById('password');
 	const eye = document.getElementById('eye');
 	password.type === 'password'
-		? ((password.type = 'text'), (eye.style.opacity = '1'))
-		: ((password.type = 'password'), (eye.style.opacity = '0.5'));
+		? ((password.type = 'text'), (eye.innerHTML = 'visibility_off'))
+		: ((password.type = 'password'), (eye.innerHTML = 'visibility'));
 };
 
 const postUser = async (email, password) => {

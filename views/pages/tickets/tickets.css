@@ -56,6 +56,7 @@ body{
     grid-template-columns: 240px 267px 267px 270px 270px 235px;
     grid-template-rows: 80px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .tickets__tab .tickets__tab--ticket:hover{
@@ -71,11 +72,13 @@ body{
     align-items: center;
     place-self: center;
     font-size: 10pt;
+    text-transform: capitalize;
+    font-weight: 600;
 }
 
 .priority{
     background-color: var(--secondary-color);
-    width: 85px;
+    width: 100px;
 }
 
 .department {
@@ -86,7 +89,7 @@ body{
 .ticket__text{
     display: grid;
     place-self: center;
-    font-weight: bold;
+    font-weight: 500;
     color: black;
 }
 
@@ -102,6 +105,30 @@ body{
     height: 35px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.responsible {
+    grid-column: 4 / span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.responsible span {
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.reporter {
+    grid-column: 5 / span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reporter span {
+    margin-left: 10px;
+    font-weight: 500;
 }
 
 .green {
@@ -125,6 +152,7 @@ body{
     bottom: 0;
     z-index: 2;
     display: none;
+    border-radius: 30px;
 }
 
 .active {
@@ -133,6 +161,7 @@ body{
 
 .home__ticketMenu--container {
     padding: 20px;
+    border-radius: 35px;
 }
 
 .container__title {
@@ -174,4 +203,63 @@ body{
 .container__grid #departmentChip {
     grid-row: 3 / span 1;
     grid-column: 2 / span 1;
+}
+
+.material-icons {
+    position: absolute;
+    top: 45px;
+    right: 30px;
+}
+
+.home__ticketMenu--container a{
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: red;
+}
+
+.container__dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.container__dates div {
+    font-weight: 500;
+}
+
+.container__dates .ticket-date {
+    text-align: center;
+    border-left: 1px solid black;
+}
+
+.container__users {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.container__users .responsible-text {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+.container__users .responsible {
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 1;
+}
+
+.container__users .reporter-text {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 1;
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+.container__users .reporter {
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 1;
 }
