@@ -91,6 +91,10 @@ form{
     opacity: 0.5;
 }
 
+.form__input input {
+    border-bottom: .5px solid gray;
+}
+
 .form__input button:hover{
     opacity: 1;
 };
@@ -129,6 +133,24 @@ form{
 
 .form__button:focus{
     background-color: var(--tertiary-color);
+}
+
+.google{
+    background-color: var(--fifthly-color);
+    color: var(--primary-color);
+    border: 2px solid var(--gray-color);
+    font-weight: 600;
+    background: url('https://img.icons8.com/fluent/48/000000/google-logo.png');
+    background-repeat: no-repeat;
+    background-position-x: 67px;
+    background-position-y: 7px;
+    background-size: 24px;
+    padding-left: 15px;
+}
+
+.google:hover {
+    background-color: var(--fifthly-color);
+    border: 2px solid var(--primary-color);
 }
 
 @media (max-width: 1367px){

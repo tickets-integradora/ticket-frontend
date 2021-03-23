@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<base href="/" />
+		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 		<link id="styles" rel="stylesheet" type="text/css" />
@@ -12,7 +13,11 @@
 		<title>Ticket Cloud</title>
 	</head>
 	<body id="content">
-		<script type="module" src="controller/index.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+		<script src="./controller/utils/firebase.js"></script>
+		<script type="module" src="./controller/index.js"></script>
 		<script src="./controller/pages/login.controller.js"></script>
 		<script src="./controller/pages/register.controller.js"></script>
 		<script src="./controller/pages/tickets.controller.js"></script>

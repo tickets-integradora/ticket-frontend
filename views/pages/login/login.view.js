@@ -7,7 +7,7 @@ const Login = () => {
         <section class="register">
 			<h1 class="register__title">Iniciar Sesión</h1>
 			<p class="register__text up">¡Bienvenido de nuevo! Inicia sesión para acceder a Ticket Cloud.</p>
-			<p class="register__text down">¿Eres <a href="${'#/register'}">nuevo aqui?</a></p>
+			<p class="register__text down">¿Eres <a href="${location.pathname}#/register">nuevo aqui?</a></p>
 			<div class="validation-error"></div>
 			<form>
 				<input class="form__input" id="email" type="text" placeholder="Correo" />
@@ -18,6 +18,7 @@ const Login = () => {
 					</span></button>
 				</div>
 				<a id="login_button" class="form__button" onclick="sendLogin(event)">Continuar</a>
+				<a id="login_button" class="form__button google" onclick="googleLogin(event)">Sign in</a>
 			</form>
 		</section>
     `;

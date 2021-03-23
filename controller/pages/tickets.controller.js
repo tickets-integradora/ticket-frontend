@@ -16,11 +16,14 @@ const openTab = (event, section_ticket) => {
 	event.currentTarget.classList.add(section_ticket);
 };
 
-const getTicket = (tickets, index) => {
-	const ticketFound = tickets.results.find((ticket) => ticket.numero_ticket == index);
-	console.log(ticketFound);
+const getTicket = (tickets, index, isEdit) => {
+	const ticketFound = tickets.find((ticket) => ticket.numero_ticket == index);
 	toggleTicket();
-	fillTicket(ticketFound);
+	if (!isEdit) {
+		fillTicket(ticketFound);
+	} else {
+		return ticketFound;
+	}
 };
 
 const toggleTicket = () => {
@@ -34,7 +37,7 @@ const fillTicket = (ticket) => {
 	const sideTicket = document.querySelector('.home__ticketMenu');
 	let ticketTemplate = `
 	<div class="home__ticketMenu--container">
-		<h1 class="container__title">Ticket ID #${ticket.numero_ticket}</h1>
+		<h1 class="container__title">Ticket ID #${ticket.numero_ticket.slice(0, 10)}</h1>
 		<a class="close-button" onclick="closeTicket()"><span class="material-icons">close</span></a>
 		<div class="container__grid">
 			<h1 id="priority">Prioridad</h1>
@@ -76,7 +79,7 @@ const fillTicket = (ticket) => {
 		</div>
 		<div class="container__buttons">
 			<button onclick="deleteTicket()" class="chip delete">Delete</button>
-			<button onclick="editTicket(${ticket})" class="chip edit">edit</button>
+			<button onclick="editTicket(tickets, '${ticket.numero_ticket}')" class="chip edit">edit</button>
 		</div>
 	</div>
 	`;
@@ -110,60 +113,90 @@ const getPriorityColor = (priority) => {
 
 const getDate = (value) => new Date(value).toUTCString().split(' ').splice(0, 4).join(' ');
 
-const deleteTicket = () => {
-	console.log('delete');
-};
+const deleteTicket = () => {};
 
-const editTicket = (ticket) => {
-	console.log(ticket);
+const editTicket = async (tickets, id) => {
+	const ticket = await getTicket(tickets, id, true);
 	const sideTicket = document.querySelector('.home__ticketMenu');
 	let ticketTemplate = `
 	<div class="home__ticketMenu--container">
-		<h1 class="container__title">Ticket Edit #${ticket.numero_ticket}</h1>
+		<h1 class="container__title">Ticket ID #${ticket.numero_ticket.slice(0, 10)}</h1>
 		<a class="close-button" onclick="closeTicket()"><span class="material-icons">close</span></a>
 		<div class="container__grid">
 			<h1 id="priority">Prioridad</h1>
 			<h1 id="status">Estado</h1>
 			<h1 id="department">Departamento</h1>
-			<div id="priorityChip" class="chip priority ${getPriorityColor(ticket.gravedad)}">${ticket.gravedad}</div>
-			<div id="statusChip" class="chip priority  ${getPriorityColor(ticket.status)}"">${ticket.status}</div>
-			<div id="departmentChip" class="chip department">${ticket.departamento}</div>
+			<select name="cars" id="cars">
+				<option value="volvo">Volvo</option>
+			  	<option value="saab">Saab</option>
+			</select>
+			<select name="cars" id="cars">
+				<option value="volvo">Volvo</option>
+			  	<option value="saab">Saab</option>
+			</select>
+			<select name="cars" id="cars">
+				<option value="volvo">Volvo</option>
+			  	<option value="saab">Saab</option>
+			</select>
 		</div>
 		<hr>
 		<div class="container__dates">
 			<div>Fecha de creación</div>
-			<div class="ticket-date">${getDate(ticket.fecha_creacion)}</div>
+			<select name="cars" id="cars">
+			<option value="volvo">Volvo</option>
+			  <option value="saab">Saab</option>
+		</select>
 			<div>Fecha de vencimiento</div>
-			<div class="ticket-date">${getDate(ticket.fecha_vencimiento)}</div>
+			<select name="cars" id="cars">
+			<option value="volvo">Volvo</option>
+			  <option value="saab">Saab</option>
+		</select>
 		</div>
 		<hr>
 		<div class="container__users">
 			<div class="responsible-text">Responsable</div>
 			<div class="responsible">
-				<img class="user"
-					src="${ticket.imagen_empleado_responsable}"
-					alt="imagen de ${ticket.empleado_responsable}"
-				>
-				<span>${ticket.empleado_responsable}</span>
+			<select name="cars" id="cars">
+			<option value="volvo">Volvo</option>
+			  <option value="saab">Saab</option>
+		</select>
 			</div>
 			<div class="reporter-text">Autor</div>
 			<div class="reporter">
-				<img class="user"
-					src="${ticket.imagen_reportador}"
-					alt="imagen de ${ticket.reportador}"
-				>
-				<span>${ticket.reportador}</span>
+			<select name="cars" id="cars">
+			<option value="volvo">Volvo</option>
+			  <option value="saab">Saab</option>
+		</select>
 			</div>
 		</div>
 		<div class="container__description">
 			<h2>Descripción</h2>
-			<div>${ticket.descripcion}</div>
+			<textarea>${ticket.descripcion}</textarea>
 		</div>
 		<div class="container__buttons">
 			<button onclick="deleteTicket()" class="chip delete">Delete</button>
-			<button onclick="editTicket()" class="chip edit">edit</button>
+			<button onclick="saveTicket()" class="chip save">save</button>
 		</div>
 	</div>
 	`;
 	sideTicket.innerHTML = ticketTemplate;
+};
+
+const saveTicket = () => {
+	closeTicket();
+};
+
+const logOut = () => {
+	firebase
+		.auth()
+		.signOut()
+		.then(() => {
+			sessionStorage.removeItem('user.name');
+			sessionStorage.removeItem('user.email');
+			sessionStorage.removeItem('user.photo');
+			window.location.href = `${location.pathname}#/login`;
+		})
+		.catch((error) => {
+			console.error(error);
+		});
 };

@@ -1,5 +1,6 @@
 @import './../../css/components/header.css';
 @import './../../css/main.css';
+@import './../login/login.css';
 
 body{
     display: grid;
@@ -289,4 +290,16 @@ body{
     height: 20px;
     cursor: pointer;
     outline: none;
+}
+
+.save {
+    border: none;
+    background-color: var(--acceptance-color);
+    width: 87px;
+    height: 20px;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    left: 190px;
+    z-index: 3;
 }

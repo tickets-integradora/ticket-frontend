@@ -4,12 +4,23 @@ const sendLogin = async (event) => {
 	event.preventDefault();
 	const email = document.getElementById('email').value;
 	const password = document.getElementById('password').value;
-	if ((email && password) !== '') {
-		postUser(email, password).then((resp) => {
-			resp === true ? (window.location.href = '#/tickets') : validationError('Email o contraseña incorrectos');
+	const auth = firebase.auth();
+
+	auth.signInWithEmailAndPassword(email, password)
+		.then((result) => {
+			// Signed in
+			// sessionStorage.setItem('token', token);
+			let user = result.user;
+			sessionStorage.setItem('user.name', user.displayName);
+			sessionStorage.setItem('user.email', user.email);
+			sessionStorage.setItem('user.photo', user.photoURL);
+			window.location.href = `${location.pathname}#/tickets`;
+		})
+		.catch((error) => {
+			let errorCode = error.code;
+			let errorMessage = error.message;
+			validationError(`Error ${errorCode} : ${errorMessage}`);
 		});
-	}
-	validationError('Los campos no deben estar vacios');
 };
 
 const validationError = (message) => {
@@ -25,17 +36,34 @@ const showPassword = () => {
 		: ((password.type = 'password'), (eye.innerHTML = 'visibility'));
 };
 
-const postUser = async (email, password) => {
-	const apiURL = API;
-	try {
-		const response = await fetch(apiURL);
-		const data = await response.json();
-		if (data.email === email && data.constrasena === password) {
-			return true;
-		} else {
-			return false;
-		}
-	} catch (error) {
-		console.error('Fetch Error', error);
-	}
+const googleLogin = () => {
+	const provider = new firebase.auth.GoogleAuthProvider();
+	firebase
+		.auth()
+		.signInWithPopup(provider)
+		.then((result) => {
+			/** @type {firebase.auth.OAuthCredential} */
+			let credential = result.credential;
+
+			// This gives you a Google Access Token. You can use it to access the Google API.
+			let token = credential.accessToken;
+			// The signed-in user info.
+			let user = result.user;
+			sessionStorage.setItem('token', token);
+			sessionStorage.setItem('user.name', user.displayName);
+			sessionStorage.setItem('user.email', user.email);
+			sessionStorage.setItem('user.photo', user.photoURL);
+			window.location.href = `${location.pathname}#/tickets`;
+		})
+		.catch((error) => {
+			// Handle Errors here.
+			let errorCode = error.code;
+			let errorMessage = error.message;
+			// The email of the user's account used.
+			let email = error.email;
+			// The firebase.auth.AuthCredential type that was used.
+			let credential = error.credential;
+			validationError(`Error ${errorCode} : ${errorMessage}`);
+			console.error(error);
+		});
 };

@@ -2,22 +2,24 @@ import getStyles from '../../../controller/utils/getStyles.js';
 import getData from '../../../controller/utils/getData.js';
 import getDate from '../../../controller/utils/getDate.js';
 import getPriorityColor from '../../../controller/utils/getPriorityColor.js';
+import getCurrentUser from '../../../controller/utils/getCurrentUser.js';
 
 const Tickets = async () => {
-	const tickets = await getData();
+	let tickets = await getData('Tickets');
 	window.tickets = tickets;
-	const openTickets = tickets.results.filter((ticket) => {
+	const openTickets = tickets.filter((ticket) => {
 		return ticket.status === 'abierto';
 	});
-	const closedTickets = tickets.results.filter((ticket) => {
+	const closedTickets = tickets.filter((ticket) => {
 		return ticket.status === 'cerrado';
 	});
-	const inProgressTickets = tickets.results.filter((ticket) => {
+	const inProgressTickets = tickets.filter((ticket) => {
 		return ticket.status === 'en progreso';
 	});
+	const currentUser = getCurrentUser();
 	getStyles('tickets');
 	const view = `
-    <section class="home">
+	<section class="home">
 			<div class="home__ticketMenu animate__animated animate__fadeInLeft">
 			</div>
 			<nav class="home__header">
@@ -30,13 +32,14 @@ const Tickets = async () => {
 				<div class="home__header--searchbar">
 					<input type="text" placeholder="Buscar" />
 				</div>
+				<div class="home__header--name">${currentUser.displayName}</div>
 				<a class="home__header--user" onclick="dropdownMenu()">
 					<img
-						src="https://picsum.photos/200"
-						alt="user image"
+						src="${currentUser.photoURL}"
+						alt="${currentUser.displayName || currentUser.email} image"
 					>
 					<ul class="home__header--dropdown">
-						<li><a href="#/login">Cerrar sesión</a></li>
+						<li><a onclick="logOut()">Cerrar sesión</a></li>
 					</ul>
 				</a>
 			</nav>
@@ -54,7 +57,7 @@ const Tickets = async () => {
 				${openTickets
 					.map((ticket) => {
 						let ticketTemplate = `
-							<a class="tickets__tab--ticket" onclick="getTicket(tickets, ${ticket.numero_ticket})">
+							<a class="tickets__tab--ticket" onclick="getTicket(tickets, '${ticket.numero_ticket}')">
 								<div class="chip priority ${getPriorityColor(ticket.gravedad)}">${ticket.gravedad}</div>
 								<div class="ticket__text">${ticket.descripcion}</div>
 								<div class="chip department">${ticket.departamento}</div>
@@ -83,7 +86,7 @@ const Tickets = async () => {
 				${inProgressTickets
 					.map(
 						(ticket) => `
-					<a class="tickets__tab--ticket"  onclick="getTicket(tickets, ${ticket.numero_ticket})">
+					<a class="tickets__tab--ticket"  onclick="getTicket(tickets, '${ticket.numero_ticket}')">
 						<div class="chip priority ${getPriorityColor(ticket.gravedad)}">${ticket.gravedad}</div>
 						<div class="ticket__text">${ticket.descripcion}</div>
 						<div class="chip department">${ticket.departamento}</div>
@@ -111,7 +114,7 @@ const Tickets = async () => {
 				${closedTickets
 					.map(
 						(ticket) => `
-					<a class="tickets__tab--ticket"  onclick="getTicket(tickets, ${ticket.numero_ticket})">
+					<a class="tickets__tab--ticket"  onclick="getTicket(tickets, '${ticket.numero_ticket}')">
 						<div class="chip priority ${getPriorityColor(ticket.gravedad)} ">${ticket.gravedad}</div>
 						<div class="ticket__text">${ticket.descripcion}</div>
 						<div class="chip department">${ticket.departamento}</div>
@@ -137,8 +140,7 @@ const Tickets = async () => {
 				</div></div>
 			</section>
 		</section>
-    `;
-
+	`;
 	return view;
 };
 

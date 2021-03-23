@@ -1,7 +1,11 @@
 const resolveRoutes = (route) => {
-	if (route.length <= 3) {
-		let validRoute = route === '/' ? route : '/:id';
-		return validRoute;
+	let currentUser = sessionStorage.getItem('user.email');
+	if (currentUser === null) {
+		if (route === 'register' || route === 'login') {
+			return `/${route}`;
+		} else {
+			return `/login`;
+		}
 	}
 	return `/${route}`;
 };
