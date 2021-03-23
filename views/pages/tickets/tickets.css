@@ -303,3 +303,17 @@ body{
     left: 190px;
     z-index: 3;
 }
+
+select {
+    border-radius: 60px;
+    height: 34px;
+    padding-left: 30px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    width: 160px;
+    display: grid;
+    place-self: center;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: capitalize;
+}

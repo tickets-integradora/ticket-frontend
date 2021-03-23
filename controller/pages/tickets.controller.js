@@ -126,17 +126,11 @@ const editTicket = async (tickets, id) => {
 			<h1 id="priority">Prioridad</h1>
 			<h1 id="status">Estado</h1>
 			<h1 id="department">Departamento</h1>
-			<select name="cars" id="cars">
-				<option value="volvo">Volvo</option>
-			  	<option value="saab">Saab</option>
+			<select onchange="changeOption('prioritys')" id="prioritys">
 			</select>
-			<select name="cars" id="cars">
-				<option value="volvo">Volvo</option>
-			  	<option value="saab">Saab</option>
+			<select onchange="changeOption('statuses')" id="statuses">
 			</select>
-			<select name="cars" id="cars">
-				<option value="volvo">Volvo</option>
-			  	<option value="saab">Saab</option>
+			<select onchange="changeOption('departments')" id="departments">
 			</select>
 		</div>
 		<hr>
@@ -180,6 +174,9 @@ const editTicket = async (tickets, id) => {
 	</div>
 	`;
 	sideTicket.innerHTML = ticketTemplate;
+	fillSelect('Departamentos', 'departments');
+	fillSelect('Prioridad', 'prioritys');
+	fillSelect('Estados', 'statuses');
 };
 
 const saveTicket = () => {
@@ -199,4 +196,44 @@ const logOut = () => {
 		.catch((error) => {
 			console.error(error);
 		});
+};
+
+const getData = (collectionName) => {
+	const db = firebase.firestore();
+	return new Promise((resolve, reject) => {
+		db.collection(collectionName).onSnapshot(
+			(collection) => {
+				let docs = collection.docs;
+				let resp = docs.map((map) => {
+					return map.data();
+				});
+				resolve(resp);
+			},
+			(error) => {
+				reject(error);
+			}
+		);
+	});
+};
+
+const fillSelect = (collectionName, idName) => {
+	getData(collectionName).then((resp) => {
+		createSelectOptions(resp, idName);
+	});
+};
+
+const createSelectOptions = (resp, idName) => {
+	let array = resp;
+	let select = document.getElementById(idName);
+	for (const item of array) {
+		let option = document.createElement('option');
+		option.value = item.id;
+		option.innerHTML = item.nombre;
+		select.appendChild(option);
+	}
+};
+
+const changeOption = (selectId) => {
+	let value = document.getElementById(selectId);
+	console.log(value);
 };
