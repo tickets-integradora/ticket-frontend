@@ -250,7 +250,7 @@ body{
 
 .container__users .responsible {
     grid-row: 2 / span 1;
-    grid-column: 2 / span 1;
+    grid-column: 1 / span 1;
 }
 
 .container__users .reporter-text {
@@ -262,7 +262,15 @@ body{
 
 .container__users .reporter {
     grid-row: 2 / span 1;
-    grid-column: 1 / span 1;
+    grid-column: 2 / span 1;
+}
+
+.container__description div {
+    margin: 0px;
+    height: 321px;
+    width: 459px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .container__buttons {
@@ -316,4 +324,17 @@ select {
     font-weight: 800;
     font-family: 'Montserrat', sans-serif;
     text-transform: capitalize;
+}
+
+textarea {
+    margin: 0px;
+    height: 321px;
+    width: 459px;
+    font-family: 'Montserrat', sans-serif;
+    resize: none;
+}
+
+#creation_date, #due_date {
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
 }

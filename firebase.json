@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "ticket-cloud",
     "public": ".",
     "ignore": [
       "firebase.json",

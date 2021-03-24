@@ -28,7 +28,7 @@ const Tickets = async () => {
 					<button class="tabs__button in_progress" onclick="openTab(event, 'in_progress')">En progreso</button>
 					<button class="tabs__button closed" onclick="openTab(event, 'closed')">Cerrados</button>
 				</div>
-				<button class="home__header--button">Crear ticket</button>
+				<button onclick="createTicket()" class="home__header--button">Crear ticket</button>
 				<div class="home__header--searchbar">
 					<input type="text" placeholder="Buscar" />
 				</div>
@@ -62,17 +62,9 @@ const Tickets = async () => {
 								<div class="ticket__text">${ticket.descripcion}</div>
 								<div class="chip department">${ticket.departamento}</div>
 								<div class="responsible">
-									<img class="user"
-										src="${ticket.imagen_empleado_responsable}"
-										alt="imagen de ${ticket.empleado_responsable}"
-									>
 									<span>${ticket.empleado_responsable}</span>
 								</div>
 								<div class="reporter">
-									<img class="user"
-										src="${ticket.imagen_reportador}"
-										alt="imagen de ${ticket.reportador}"
-									>
 									<span>${ticket.reportador}</span>
 								</div>
 								<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>
@@ -91,17 +83,9 @@ const Tickets = async () => {
 						<div class="ticket__text">${ticket.descripcion}</div>
 						<div class="chip department">${ticket.departamento}</div>
 						<div class="responsible">
-							<img class="user"
-								src="${ticket.imagen_empleado_responsable}"
-								alt="imagen de ${ticket.empleado_responsable}"
-							>
 							<span>${ticket.empleado_responsable}</span>
 						</div>
 						<div class="reporter">
-							<img class="user"
-								src="${ticket.imagen_reportador}"
-								alt="imagen de ${ticket.reportador}"
-							>
 							<span>${ticket.reportador}</span>
 						</div>
 						<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>
@@ -119,17 +103,9 @@ const Tickets = async () => {
 						<div class="ticket__text">${ticket.descripcion}</div>
 						<div class="chip department">${ticket.departamento}</div>
 						<div class="responsible">
-							<img class="user"
-								src="${ticket.imagen_empleado_responsable}"
-								alt="imagen de ${ticket.empleado_responsable}"
-							>
 							<span>${ticket.empleado_responsable}</span>
 						</div>
 						<div class="reporter">
-							<img class="user"
-								src="${ticket.imagen_reportador}"
-								alt="imagen de ${ticket.reportador}"
-							>
 							<span>${ticket.reportador}</span>
 						</div>
 						<div class="ticket__text">${getDate(ticket.fecha_vencimiento)}</div>

@@ -58,18 +58,10 @@ const fillTicket = (ticket) => {
 		<div class="container__users">
 			<div class="responsible-text">Responsable</div>
 			<div class="responsible">
-				<img class="user"
-					src="${ticket.imagen_empleado_responsable}"
-					alt="imagen de ${ticket.empleado_responsable}"
-				>
 				<span>${ticket.empleado_responsable}</span>
 			</div>
 			<div class="reporter-text">Autor</div>
 			<div class="reporter">
-				<img class="user"
-					src="${ticket.imagen_reportador}"
-					alt="imagen de ${ticket.reportador}"
-				>
 				<span>${ticket.reportador}</span>
 			</div>
 		</div>
@@ -78,7 +70,7 @@ const fillTicket = (ticket) => {
 			<div>${ticket.descripcion}</div>
 		</div>
 		<div class="container__buttons">
-			<button onclick="deleteTicket()" class="chip delete">Delete</button>
+			<button onclick="deleteTicket('${ticket.numero_ticket}')" class="chip delete">Delete</button>
 			<button onclick="editTicket(tickets, '${ticket.numero_ticket}')" class="chip edit">edit</button>
 		</div>
 	</div>
@@ -113,11 +105,26 @@ const getPriorityColor = (priority) => {
 
 const getDate = (value) => new Date(value).toUTCString().split(' ').splice(0, 4).join(' ');
 
-const deleteTicket = () => {};
+const deleteTicket = (idTicket) => {
+	console.log('delete', idTicket);
+	const db = firebase.firestore();
+	db.collection('Tickets')
+		.doc(idTicket)
+		.delete()
+		.then(() => {
+			console.log('Document successfully deleted!');
+			closeTicket();
+			location.reload();
+		})
+		.catch((error) => {
+			console.error('Error removing document: ', error);
+		});
+};
 
 const editTicket = async (tickets, id) => {
 	const ticket = await getTicket(tickets, id, true);
 	const sideTicket = document.querySelector('.home__ticketMenu');
+	console.log(ticket);
 	let ticketTemplate = `
 	<div class="home__ticketMenu--container">
 		<h1 class="container__title">Ticket ID #${ticket.numero_ticket.slice(0, 10)}</h1>
@@ -126,61 +133,98 @@ const editTicket = async (tickets, id) => {
 			<h1 id="priority">Prioridad</h1>
 			<h1 id="status">Estado</h1>
 			<h1 id="department">Departamento</h1>
-			<select onchange="changeOption('prioritys')" id="prioritys">
+			<select onchange="changeOption('prioritys')" id="prioritys" selected="${ticket.gravedad}">
 			</select>
-			<select onchange="changeOption('statuses')" id="statuses">
+			<select onchange="changeOption('statuses')" id="statuses"  value="${ticket.status}">
 			</select>
-			<select onchange="changeOption('departments')" id="departments">
+			<select onchange="changeOption('departments')" id="departments" >
 			</select>
 		</div>
 		<hr>
 		<div class="container__dates">
 			<div>Fecha de creación</div>
-			<select name="cars" id="cars">
-			<option value="volvo">Volvo</option>
-			  <option value="saab">Saab</option>
-		</select>
+			<input type="date" id="creation_date" name="trip-start"
+      				value="${new Date(ticket.fecha_creacion).toDateInputValue()}"
+       				>
 			<div>Fecha de vencimiento</div>
-			<select name="cars" id="cars">
-			<option value="volvo">Volvo</option>
-			  <option value="saab">Saab</option>
-		</select>
+			<input type="date" id="due_date" name="trip-start"
+      				value="${new Date(ticket.fecha_vencimiento).toDateInputValue()}"
+       				>
 		</div>
 		<hr>
 		<div class="container__users">
 			<div class="responsible-text">Responsable</div>
 			<div class="responsible">
-			<select name="cars" id="cars">
-			<option value="volvo">Volvo</option>
-			  <option value="saab">Saab</option>
-		</select>
+				<select id="SelectResponsible">
+					<option value="volvo">Volvo</option>
+					<option value="saab">Saab</option>
+				</select>
 			</div>
 			<div class="reporter-text">Autor</div>
 			<div class="reporter">
-			<select name="cars" id="cars">
-			<option value="volvo">Volvo</option>
-			  <option value="saab">Saab</option>
-		</select>
+				<select id="SelectReporter">
+				</select>
 			</div>
 		</div>
 		<div class="container__description">
 			<h2>Descripción</h2>
-			<textarea>${ticket.descripcion}</textarea>
+			<textarea id="description-info">${ticket.descripcion}</textarea>
 		</div>
 		<div class="container__buttons">
-			<button onclick="deleteTicket()" class="chip delete">Delete</button>
-			<button onclick="saveTicket()" class="chip save">save</button>
+			<button onclick="deleteTicket('${ticket.numero_ticket}')" class="chip delete">Delete</button>
+			<button onclick="saveTicket('edit', '${ticket.numero_ticket}')" class="chip save">save</button>
 		</div>
 	</div>
 	`;
 	sideTicket.innerHTML = ticketTemplate;
-	fillSelect('Departamentos', 'departments');
-	fillSelect('Prioridad', 'prioritys');
-	fillSelect('Estados', 'statuses');
+	fillSelect('Departamentos', 'departments', ticket.departamento);
+	fillSelect('Prioridad', 'prioritys', ticket.gravedad);
+	fillSelect('Estados', 'statuses', ticket.status);
+	createSelectOptions(ticket.reportador, 'SelectReporter', ticket.reportador);
+	const creation_date = document.getElementById('creation_date');
+	const due_date = document.getElementById('due_date');
+	creation_date.addEventListener('change', saveValue);
+	due_date.addEventListener('change', saveValue);
 };
 
-const saveTicket = () => {
-	closeTicket();
+const saveTicket = async (ticketType, numero_ticket) => {
+	let ticketData = {
+		fecha_creacion: await new Date(document.getElementById('creation_date').value).toISOString(),
+		fecha_vencimiento: await new Date(document.getElementById('due_date').value).toISOString(),
+		gravedad: await document.getElementById('prioritys').value,
+		descripcion: await document.getElementById('description-info').value,
+		departamento: await document.getElementById('departments').value,
+		empleado_responsable: await document.getElementById('SelectResponsible').value,
+		reportador: await document.getElementById('SelectReporter').value,
+		status: await document.getElementById('statuses').value,
+	};
+	console.log(ticketData);
+	console.log({ticketType, numero_ticket});
+	const db = firebase.firestore();
+	if (ticketType == 'edit') {
+		db.collection('Tickets')
+			.doc(numero_ticket)
+			.set(ticketData)
+			.then((docRef) => {
+				console.log('Document written with ID: ', docRef);
+				closeTicket();
+				location.reload();
+			})
+			.catch((error) => {
+				console.error('Error adding document: ', error);
+			});
+	} else {
+		db.collection('Tickets')
+			.add(ticketData)
+			.then((docRef) => {
+				console.log('Document written with ID: ', docRef);
+				closeTicket();
+				location.reload();
+			})
+			.catch((error) => {
+				console.error('Error adding document: ', error);
+			});
+	}
 };
 
 const logOut = () => {
@@ -216,24 +260,111 @@ const getData = (collectionName) => {
 	});
 };
 
-const fillSelect = (collectionName, idName) => {
+const fillSelect = (collectionName, idName, selectedId) => {
 	getData(collectionName).then((resp) => {
-		createSelectOptions(resp, idName);
+		createSelectOptions(resp, idName, selectedId);
 	});
 };
 
-const createSelectOptions = (resp, idName) => {
+const createSelectOptions = (resp, idName, selectedId) => {
 	let array = resp;
 	let select = document.getElementById(idName);
-	for (const item of array) {
+	if (typeof resp !== 'string') {
+		for (const item of array) {
+			let option = document.createElement('option');
+			option.value = item.id;
+			option.innerHTML = item.id;
+			if (option.value == selectedId) {
+				option.selected = true;
+			}
+			select.appendChild(option);
+		}
+	} else {
 		let option = document.createElement('option');
-		option.value = item.id;
-		option.innerHTML = item.nombre;
+		option.value = resp;
+		option.innerHTML = resp;
+		if (option.value == selectedId) {
+			option.selected = true;
+		}
 		select.appendChild(option);
 	}
 };
 
 const changeOption = (selectId) => {
 	let value = document.getElementById(selectId);
-	console.log(value);
+	// console.log(value);
+};
+
+const saveValue = (e) => {
+	let date = new Date(e.target.value).toISOString();
+	// console.log(date);
+};
+
+Date.prototype.toDateInputValue = function () {
+	let local = new Date(this);
+	local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+	return local.toJSON().slice(0, 10);
+	// new Date().toDateInputValue()
+};
+
+const createTicket = async () => {
+	const sideTicket = document.querySelector('.home__ticketMenu');
+	console.log(sideTicket);
+	let ticketTemplate = `
+	<div class="home__ticketMenu--container">
+		<h1 class="container__title">Nuevo Ticket</h1>
+		<a class="close-button" onclick="closeTicket()"><span class="material-icons">close</span></a>
+		<div class="container__grid">
+			<h1 id="priority">Prioridad</h1>
+			<h1 id="status">Estado</h1>
+			<h1 id="department">Departamento</h1>
+			<select onchange="changeOption('prioritys')" id="prioritys">
+			</select>
+			<select onchange="changeOption('statuses')" id="statuses">
+			</select>
+			<select onchange="changeOption('departments')" id="departments" >
+			</select>
+		</div>
+		<hr>
+		<div class="container__dates">
+			<div>Fecha de creación</div>
+			<input type="date" id="creation_date" name="trip-start"
+					min="${new Date().toDateInputValue()}"
+	  				value="${new Date().toDateInputValue()}"
+	   				>
+			<div>Fecha de vencimiento</div>
+			<input type="date" id="due_date" name="trip-start"
+	  				value="${new Date().toDateInputValue()}"
+	   				>
+		</div>
+		<hr>
+		<div class="container__users">
+			<div class="responsible-text">Responsable</div>
+			<div class="responsible">
+				<select id="SelectResponsible">
+					<option value="volvo">Volvo</option>
+					<option value="saab">Saab</option>
+				</select>
+			</div>
+			<div class="reporter-text">Autor</div>
+			<div class="reporter">
+				<select id="SelectReporter">
+				</select>
+			</div>
+		</div>
+		<div class="container__description">
+			<h2>Descripción</h2>
+			<textarea id="description-info"></textarea>
+		</div>
+		<div class="container__buttons">
+			<button onclick="saveTicket()" class="chip save">save</button>
+		</div>
+	</div>
+	`;
+	toggleTicket();
+	sideTicket.innerHTML = ticketTemplate;
+	fillSelect('Departamentos', 'departments');
+	fillSelect('Prioridad', 'prioritys');
+	fillSelect('Estados', 'statuses');
+	createSelectOptions(sessionStorage.getItem('user.name'), 'SelectReporter', sessionStorage.getItem('user.name'));
 };
